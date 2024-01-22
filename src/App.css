@@ -269,3 +269,113 @@ s {
 .atc-button svg {
 	margin: 1.25rem 0 1.25rem 0;
 }
+
+.review-area {
+	margin-top: 78px;
+	padding: 0 3rem 0 3rem;
+}
+
+.review-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+.write-review {
+	width: 228px;
+	height: 47px;
+	border-radius: 10px;
+	background: #FF7E1B;
+	border: none;
+	color: #FFF;
+	font-size: 16px;
+	font-weight: 700;
+	transform: translateY(11px);
+}
+
+.review-title {
+	color: #1D2026;
+	text-align: center;
+	font-size: 30px;
+	font-weight: 700;
+	margin: 0;
+}
+
+.review-list {
+	margin-top: 42px;
+	display: flex;
+	flex-direction: column;
+	row-gap: 29px;
+}
+
+.person-review-box {
+	width: 40rem;
+	display: flex;
+	column-gap: 22px;
+}
+
+.review-content {
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+}
+
+.top-line {
+	display: flex;
+	justify-content: space-between;
+}
+
+.edit-buttons {
+	display: flex;
+	column-gap: 18px;
+}
+
+.edit-buttons button {
+	background: none;
+	border: none;
+	text-decoration: underline;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 0;
+	cursor: pointer;
+}
+
+.edit-buttons button:hover {
+	text-decoration: none;
+}
+
+.author {
+	text-align: left;
+	font-size: 16px;
+	font-weight: 500;
+	margin: 0;
+}
+
+.user-placeholder {
+	width: 45px;
+	height: 45px;
+}
+
+.star-rating {
+	display: flex;
+	column-gap: 6px;
+	margin: 0;
+}
+
+.star-rating svg polygon {
+	width: 22px;
+	height: 22px;
+}
+
+.author-title {
+	font-size: 16px;
+	font-weight: 500;
+	margin: 0;
+}
+
+.author-paragraph {
+	color: #676767;
+	font-size: 16px;
+	font-weight: 400;
+	margin: 0;
+}
