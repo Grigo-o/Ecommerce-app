@@ -302,7 +302,13 @@ s {
 	font-family: Kumbh Sans;
 	font-size: 16px;
 	font-weight: 700;
+	cursor: pointer;
 	transform: translateY(11px);
+	transition: 0.2s;
+}
+
+.write-review:hover {
+	background-color: rgb(207, 114, 0);
 }
 
 .review-title {
@@ -318,6 +324,7 @@ s {
 	display: flex;
 	flex-direction: column;
 	row-gap: 29px;
+	margin-bottom: 5rem;
 }
 
 .person-review-box {
@@ -598,4 +605,54 @@ s {
 
 .checkout:hover {
 	background-color: rgb(207, 114, 0);
+}
+
+.active-thumbnail {
+	filter: opacity(30%);
+	box-shadow: 0px 0px 0px 2px rgba(255,126,27,1);
+}
+
+.product-quantity-span {
+	border-radius: 100px;
+	background: #FF7E1B;
+	color: #FFF;	
+	font-family: Kumbh Sans;
+	font-size: 10px;
+	font-weight: 600;
+	line-height: normal;
+	padding: 0 6px 0 6px;
+	position: absolute;
+	transform: translateX(-70%) translateY(-30%);
+}
+
+.own-rating button {
+	border: none;
+	background: none;
+	padding: 0;
+	margin: 0;
+}
+
+.review-star:hover {
+	fill: #FAD409;
+}
+
+.review-star:hover path {
+	stroke: #616161;
+}
+
+.yellow-star {
+	fill: #FAD409;
+}
+
+.yellow-star path {
+	stroke: #FAD409;
+}
+
+.error-message {
+	color: #FF3D3D;
+	font-family: Kumbh Sans;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: normal;
+	margin-top: 0.5rem;
 }

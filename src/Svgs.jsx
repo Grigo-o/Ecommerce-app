@@ -59,13 +59,15 @@ export const BlackStarSvg = (
 	</svg>
 );
 
-export const ReviewStarSvg = (
+export const ReviewStarSvg = ({ filled, onClick }) => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width="40"
 		height="40"
 		viewBox="0 0 40 40"
-		fill="none">
+		fill="none"
+		className={`review-star ${filled ? "yellow-star" : ""}`}
+		onClick={onClick}>
 		<path
 			d="M20 3.33325L25.15 13.7666L36.6667 15.4499L28.3334 23.5666L30.3 35.0333L20 29.6166L9.70004 35.0333L11.6667 23.5666L3.33337 15.4499L14.85 13.7666L20 3.33325Z"
 			stroke="#616161"
