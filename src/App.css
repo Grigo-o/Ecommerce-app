@@ -337,6 +337,7 @@ s {
 	display: flex;
 	flex-direction: column;
 	row-gap: 10px;
+	width: 100%;
 }
 
 .top-line {
@@ -363,6 +364,10 @@ s {
 	text-decoration: none;
 }
 
+.no-buttons {
+	display: none;
+}
+
 .author {
 	text-align: left;
 	font-size: 16px;
@@ -373,6 +378,7 @@ s {
 .user-placeholder {
 	width: 45px;
 	height: 45px;
+	border-radius: 50%;
 }
 
 .star-rating {

@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./App.css";
-import { assetsBaseUrl } from "../data";
+import { assetsBaseUrl, product } from "../data";
+import YellowStarSvg from "./Svgs.jsx";
 import {
 	StarSvg,
-	YellowStarSvg,
 	BlackStarSvg,
 	ReviewStarSvg,
 	Logo,
@@ -23,6 +23,8 @@ function App() {
 	const [activeThumbnail, setActiveThumbnail] = useState(0);
 	const [isWriteReviewMode, setIsWriteReviewMode] = useState(false);
 	const [rating, setRating] = useState(0);
+	const [reviews, setReviews] = useState(product.reviews);
+	const [editingIndex, setEditingIndex] = useState(null);
 
 	const thumbnailImages = [
 		`${assetsBaseUrl}image-product-1-thumbnail.jpg`,
@@ -54,10 +56,47 @@ function App() {
 		validationSchema: reviewSchema,
 		validateOnChange: false,
 		validateOnBlur: false,
-		onSubmit: (values) => {
-			console.log("Form submitted with values:", values);
+		onSubmit: (values, { resetForm }) => {
+			const newReview = {
+				user: "Nakoshi Susumu",
+				starRating: values.rating,
+				writtenReview: values.description,
+				headline: values.headline,
+			};
+
+			if (editingIndex !== null) {
+				setReviews((prevReviews) =>
+					prevReviews.filter((_, index) => index !== editingIndex)
+				);
+
+				setEditingIndex(null);
+			}
+
+			setReviews((prevReviews) => [newReview, ...prevReviews]);
+
+			resetForm();
+			setRating(0);
+			setIsWriteReviewMode(false);
 		},
 	});
+
+	const handleDeleteReview = (index) => {
+		setReviews((prevReviews) => prevReviews.filter((review, i) => i !== index));
+	};
+
+	const handleEditReview = (index) => {
+		const reviewToEdit = reviews[index];
+
+		formik.setValues({
+			rating: reviewToEdit.starRating,
+			headline: reviewToEdit.headline,
+			description: reviewToEdit.writtenReview,
+		});
+
+		setRating(reviewToEdit.starRating);
+		setEditingIndex(index);
+		setIsWriteReviewMode(true);
+	};
 
 	const handleStarClick = (rating) => {
 		formik.setFieldValue("rating", rating);
@@ -220,16 +259,16 @@ function App() {
 						<h3 className="company-name">Sneaker Company</h3>
 						<h2 className="product-name">Fall Limited Sneakers</h2>
 						<div className="review-box">
-							{YellowStarSvg}
-							{YellowStarSvg}
-							{YellowStarSvg}
-							{YellowStarSvg}
+							<YellowStarSvg />
+							<YellowStarSvg />
+							<YellowStarSvg />
+							<YellowStarSvg />
 							{BlackStarSvg}
 							<p>4.2 out of 5</p>
 						</div>
 						<p className="paragraph">
 							These low-profile sneakers are your perfect casual wear companion.
-							Featuring a durable rubber outer sole, they’ll withstand
+							Featuring a durable rubber outer sole, they'll withstand
 							everything the weather can offer.
 						</p>
 						<div className="price-box">
@@ -261,77 +300,57 @@ function App() {
 					)}
 					{!isWriteReviewMode && (
 						<div className="review-list">
-							<div className="person-review-box">
-								<img
-									src="src/assets/user-placeholder.png"
-									className="user-placeholder"></img>
-								<div className="review-content">
-									<div className="top-line">
-										<p className="author">Ryan Welles</p>
-										<div className="edit-buttons">
-											<button className="delete-review">Delete</button>
-											<button className="edit-button">Edit</button>
+							{[...reviews].map((review, index) => (
+								<div key={index} className="person-review-box">
+									<img
+										src={
+											review.user === "Nakoshi Susumu"
+												? "src/assets/nakoshi.jpg"
+												: "src/assets/user-placeholder.png"
+										}
+										className="user-placeholder"
+									/>
+									<div className="review-content">
+										<div className="top-line">
+											<p className="author">{review.user}</p>
+											<div
+												className={
+													review.user === "Nakoshi Susumu"
+														? "edit-buttons"
+														: "no-buttons"
+												}>
+												<button
+													className="delete-review-btn"
+													onClick={() => handleDeleteReview(index)}>
+													Delete
+												</button>
+												<button
+													className="edit-review-btn"
+													onClick={() => handleEditReview(index)}>
+													Edit
+												</button>
+											</div>
 										</div>
+										<div className="star-rating">
+											{(() => {
+												const stars = [];
+												for (let i = 1; i <= review.starRating; i++) {
+													stars.push(<YellowStarSvg key={`star-${i}`} />);
+												}
+
+												const emptyStars = [];
+												for (let i = 1; i <= 5 - review.starRating; i++) {
+													emptyStars.push(<StarSvg key={`empty-star-${i}`} />);
+												}
+
+												return [...stars, ...emptyStars];
+											})()}
+										</div>
+										<p className="author-title">{review.headline}</p>
+										<p className="author-paragraph">{review.writtenReview}</p>
 									</div>
-									<div className="star-rating">
-										{YellowStarSvg}
-										{YellowStarSvg}
-										{YellowStarSvg}
-										{YellowStarSvg}
-										{StarSvg}
-									</div>
-									<p className="author-title">Good for its price</p>
-									<p className="author-paragraph">
-										The quality is good considering the affordable price point.
-										They look good with jeans and are quite comfortable for
-										daily wear.
-									</p>
 								</div>
-							</div>
-							<div className="person-review-box">
-								<img
-									src="src/assets/user-placeholder.png"
-									className="user-placeholder"></img>
-								<div className="review-content">
-									<div className="top-line">
-										<p className="author">Emily Moore</p>
-									</div>
-									<div className="star-rating">
-										{YellowStarSvg}
-										{YellowStarSvg}
-										{YellowStarSvg}
-										{YellowStarSvg}
-										{YellowStarSvg}
-									</div>
-									<p className="author-title">Great quality</p>
-									<p className="author-paragraph">
-										Comfortable for long walks, and they've held up great so
-										far. They've quickly become my go-to pair!
-									</p>
-								</div>
-							</div>
-							<div className="person-review-box">
-								<img
-									src="src/assets/user-placeholder.png"
-									className="user-placeholder"></img>
-								<div className="review-content">
-									<div className="top-line">
-										<p className="author">Patricia Lebsack</p>
-									</div>
-									<div className="star-rating">
-										{YellowStarSvg}
-										{YellowStarSvg}
-										{YellowStarSvg}
-										{YellowStarSvg}
-										{YellowStarSvg}
-									</div>
-									<p className="author-title">Recommended</p>
-									<p className="author-paragraph">
-										Absolutely love these sneakers! They have a sleek, modern
-										design with a comfortable fit right out of the box.
-									</p>
-								</div>
-							</div>
+							))}
 						</div>
 					)}
 					{isWriteReviewMode && (

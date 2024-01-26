@@ -1,4 +1,4 @@
-export const StarSvg = (
+export const StarSvg = () => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width="23"
@@ -15,7 +15,7 @@ export const StarSvg = (
 	</svg>
 );
 
-export const YellowStarSvg = (
+const YellowStarSvg = () => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width="24"
@@ -183,3 +183,5 @@ export const TrashIcon = (
 		<g mask="url(#mask0_0_632)"></g>
 	</svg>
 );
+
+export default YellowStarSvg;
