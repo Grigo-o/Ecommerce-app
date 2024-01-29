@@ -184,4 +184,72 @@ export const TrashIcon = (
 	</svg>
 );
 
+export const MenuIcon = (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="16"
+		height="15"
+		viewBox="0 0 16 15"
+		fill="none"
+		className="menu-icon">
+		<path
+			fillRule="evenodd"
+			clipRule="evenodd"
+			d="M0 0H16V3H0V0ZM0 6H16V9H0V6ZM16 12H0V15H16V12Z"
+			fill="#69707D"
+		/>
+	</svg>
+);
+
+export const CloseIcon = (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="14"
+		height="15"
+		viewBox="0 0 14 15"
+		fill="none"
+		className="close-icon">
+		<path
+			fillRule="evenodd"
+			clipRule="evenodd"
+			d="M7.00023 5.37868L2.40404 0.782486L0.282715 2.90381L4.87891 7.5L0.282715 12.0962L2.40404 14.2175L7.00023 9.62132L11.5964 14.2175L13.7177 12.0962L9.12155 7.5L13.7177 2.90381L11.5964 0.782486L7.00023 5.37868Z"
+			fill="#69707D"
+		/>
+	</svg>
+);
+
+export const NextIcon = (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="40"
+		height="40"
+		viewBox="0 0 40 40"
+		fill="none"
+		className="next-icon">
+		<circle cx="20" cy="20" r="20" fill="white" />
+		<path
+			d="M17.1428 14.2857L22.8571 20L17.1428 25.7143"
+			stroke="#1D2026"
+			strokeWidth="3"
+		/>
+	</svg>
+);
+
+export const PreviousIcon = (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="40"
+		height="40"
+		viewBox="0 0 40 40"
+		fill="none"
+		className="previous-icon">
+		<circle cx="20" cy="20" r="20" fill="white" />
+		<path
+			d="M22.8572 14.2857L17.1429 20L22.8572 25.7143"
+			stroke="#1D2026"
+			strokeWidth="3"
+		/>
+	</svg>
+);
+
 export default YellowStarSvg;

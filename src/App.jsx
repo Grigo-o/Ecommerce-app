@@ -3,7 +3,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./App.css";
 import { assetsBaseUrl, product } from "../data";
-import YellowStarSvg from "./Svgs.jsx";
+import YellowStarSvg, {
+	CloseIcon,
+	MenuIcon,
+	NextIcon,
+	PreviousIcon,
+} from "./Svgs.jsx";
 import {
 	StarSvg,
 	BlackStarSvg,
@@ -25,6 +30,7 @@ function App() {
 	const [rating, setRating] = useState(0);
 	const [reviews, setReviews] = useState(product.reviews);
 	const [editingIndex, setEditingIndex] = useState(null);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const thumbnailImages = [
 		`${assetsBaseUrl}image-product-1-thumbnail.jpg`,
@@ -34,6 +40,18 @@ function App() {
 	];
 
 	const mainImage = `${assetsBaseUrl}image-product-${activeThumbnail + 1}.jpg`;
+
+	const handlePrevious = () => {
+		setActiveThumbnail((prevIndex) =>
+			prevIndex === 0 ? thumbnailImages.length - 1 : prevIndex - 1
+		);
+	};
+
+	const handleNext = () => {
+		setActiveThumbnail((prevIndex) =>
+			prevIndex === thumbnailImages.length - 1 ? 0 : prevIndex + 1
+		);
+	};
 
 	const reviewSchema = Yup.object().shape({
 		rating: Yup.number()
@@ -208,13 +226,20 @@ function App() {
 		setIsWriteReviewMode(false);
 	};
 
+	const toggleMenu = () => {
+		setIsMenuOpen(!isMenuOpen);
+	};
+
 	return (
 		<>
 			<div className="container">
 				<header>
 					<div className="navbar">
-						{Logo}
-						<div className="pages">
+						<button className="menu-button" onClick={toggleMenu}>
+							{isMenuOpen ? CloseIcon : MenuIcon}
+						</button>
+						{!isMenuOpen ? Logo : ""}
+						<div className={`pages${isMenuOpen ? "-expanded" : ""}`}>
 							<a href="#">Collections</a>
 							<a href="#">Men</a>
 							<a href="#">Women</a>
@@ -239,6 +264,14 @@ function App() {
 				<div className="product-area">
 					<div className="images">
 						<div className="main-image">
+							<div className="image-slide">
+								<button className="previous-button" onClick={handlePrevious}>
+									{PreviousIcon}
+								</button>
+								<button className="next-button" onClick={handleNext}>
+									{NextIcon}
+								</button>
+							</div>
 							<img src={mainImage} alt={`Product ${activeThumbnail + 1}`} />
 						</div>
 						<div className="small-images">
@@ -271,11 +304,13 @@ function App() {
 							Featuring a durable rubber outer sole, they'll withstand
 							everything the weather can offer.
 						</p>
-						<div className="price-box">
-							<h3 className="price">$125.00</h3>
-							<span>50%</span>
+						<div className="all-prices">
+							<div className="price-box">
+								<h3 className="price">$125.00</h3>
+								<span>50%</span>
+							</div>
+							<s>$250.00</s>
 						</div>
-						<s>$250.00</s>
 						<div className="atc-box">
 							<div className="quantity">
 								<button onClick={decreaseQuantity}>{MinusIcon}</button>
@@ -295,6 +330,9 @@ function App() {
 							<h2 className="review-title">Customer reviews</h2>
 							<button className="write-review" onClick={toggleWriteReviewMode}>
 								Write a review
+							</button>
+							<button className="add-btn" onClick={toggleWriteReviewMode}>
+								Add
 							</button>
 						</div>
 					)}
